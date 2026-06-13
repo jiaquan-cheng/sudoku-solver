@@ -1,6 +1,6 @@
 # Sudoku Solver
 
-Sudoku Solver build on top of Z3 SMT solver.
+Sudoku Solver built using the Z3 SMT solver.
 
 ## Installation
 
