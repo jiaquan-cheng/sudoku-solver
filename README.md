@@ -1,5 +1,7 @@
 # Sudoku Solver
 
+[![CI](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yml/badge.svg?branch=ci-testing)](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yml)
+
 Sudoku Solver built using the Z3 SMT solver.
 
 ## Installation
