@@ -14,7 +14,7 @@ poetry install
 
 ## Usage
 
-If you run without any arguments, the program will solve a default Sudoku puzzle. 
+If you run without any arguments, the program will solve a default Sudoku puzzle.
 
 ```bash
 poetry run solve
