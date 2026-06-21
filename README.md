@@ -14,8 +14,15 @@ poetry install
 
 ## Usage
 
-Change the `puzzle` variable in `solver.py` to solve different puzzles. The solution will be printed to the console. To execute the solver, run:
+If you run without any arguments, the program will solve a default Sudoku puzzle. 
 
 ```bash
 poetry run solve
+```
+
+You can also provide a Sudoku puzzle as a 81-character string (with '0' for empty cells):
+
+```bash
+poetry run solve "530070000600195000098000060800060003400803001700020006060000280000419005000080079"
+
 ```
