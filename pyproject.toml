@@ -17,7 +17,8 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-solve = "sudoku_solver.solver:main"
+solve = "sudoku_solver.__main__:main"
+
 [dependency-groups]
 dev = [
     "pytest (>=9.0.3,<10.0.0)",

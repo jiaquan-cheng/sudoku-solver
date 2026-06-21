@@ -1,17 +1,5 @@
 from z3 import Int, Solver, sat, unsat, ModelRef, ArithRef
 
-puzzle = [
-        [5, 3, 0, 0, 7, 0, 0, 0, 0],
-        [6, 0, 0, 1, 9, 5, 0, 0, 0],
-        [0, 9, 8, 0, 0, 0, 0, 6, 0],
-        [8, 0, 0, 0, 6, 0, 0, 0, 3],
-        [4, 0, 0, 8, 0, 3, 0, 0, 1],
-        [7, 0, 0, 0, 2, 0, 0, 0, 6],
-        [0, 6, 0, 0, 0, 0, 2, 8, 0],
-        [0, 0, 0, 4, 1, 9, 0, 0, 5],
-        [0, 0, 0, 0, 8, 0, 0, 7, 9]
-    ]
-
 def print_puzzle(puzzle: list[list[int]]):
     for ir, r in enumerate(puzzle):
         for ic, c in enumerate(r):
@@ -67,9 +55,10 @@ def add_sudoku_constraints(solver: Solver, grid: list[list[ArithRef]]):
                     solver.add(c != c2)
 
 
-def main():
-    print_puzzle(puzzle)
+def solve_puzzle(puzzle: list[list[int]]):
+    assert puzzle is not None, "Puzzle must be provided"
     assert len(puzzle) == 9 and all(len(r) == 9 for r in puzzle), "Puzzle must be 9x9"
+    print_puzzle(puzzle)
     
     grid = [[Int(f"{r}{c}") for c in range(9)] for r in range(9)]
     solver = Solver()
