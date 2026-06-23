@@ -21,7 +21,7 @@ def main():
         if args.puzzle and len(args.puzzle) == 81 and args.puzzle.isdigit():
             puzzle = str_to_list_of_lists(args.puzzle)
         elif args.puzzle:
-            raise ValueError("Puzzle must be an 81-character string of digits (0-9).")
+            raise ValueError("Puzzle must be an 81-character string of digits (0-9). Your input length is: " + str(len(args.puzzle)))
         else:
             puzzle = [
                 [5, 3, 0, 0, 7, 0, 0, 0, 0],

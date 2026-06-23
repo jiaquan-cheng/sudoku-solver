@@ -26,3 +26,5 @@ You can also provide a Sudoku puzzle as a 81-character string (with '0' for empt
 poetry run solve "530070000600195000098000060800060003400803001700020006060000280000419005000080079"
 
 ```
+
+Note: The solver does not check if the puzzle has a unique solution.
