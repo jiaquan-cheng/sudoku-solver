@@ -1,8 +1,11 @@
 # Sudoku Solver
 
-[![CI](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yml/badge.svg?branch=ci-testing)](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yml)
+[![CI](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yaml) [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sudoku-solver-jia.streamlit.app/)
 
 Sudoku Solver built using the Z3 SMT solver.
+
+## Demo
+You can try the solver online [here](https://sudoku-solver-jia.streamlit.app/).
 
 ## Installation
 
@@ -20,7 +23,7 @@ If you run without any arguments, the program will solve a default Sudoku puzzle
 poetry run solve
 ```
 
-You can also provide a Sudoku puzzle as a 81-character string (with '0' for empty cells):
+You can also provide a Sudoku puzzle as a 81-character string (use 0 for empty cells):
 
 ```bash
 poetry run solve "530070000600195000098000060800060003400803001700020006060000280000419005000080079"
