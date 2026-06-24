@@ -1,6 +1,6 @@
 # Sudoku Solver
 
-[![CI](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yaml) [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sudoku-solver-jia.streamlit.app/)
+[![CI](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yaml/badge.svg)](https://github.com/jiaquan-cheng/sudoku-solver/actions/workflows/ci.yaml) [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sudoku-solver-jia.streamlit.app/)
 
 Sudoku Solver built using the Z3 SMT solver.
 
