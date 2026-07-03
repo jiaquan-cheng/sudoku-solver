@@ -1,0 +1,18 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+.venv
+.pytest_cache
+
+# Docker
+.dockerignore
+Dockerfile
+
+# IDEs
+.vscode
+.idea
+.DS_Store

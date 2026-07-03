@@ -31,3 +31,22 @@ poetry run solve "53007000060019500009800006080006000340080300170002000606000028
 ```
 
 Note: The solver does not check if the puzzle has a unique solution.
+
+## Docker
+Build the image:
+```bash
+docker build -t sudoku-solver .
+```
+
+Run with default puzzle:
+
+```bash
+docker run --rm sudoku-solver
+```
+
+Provide a puzzle:
+
+```bash
+docker run --rm sudoku-solver "530070000600195000098000060800060003400803001700020006060000280000419005000080079"
+
+```
