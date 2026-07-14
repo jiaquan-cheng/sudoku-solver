@@ -23,14 +23,18 @@ solve = "sudoku_solver.__main__:main"
 dev = [
     "pytest (>=9.0.3,<10.0.0)",
     "ruff (>=0.15.17,<0.16.0)",
-    "black (>=26.5.1,<27.0.0)",
     "pre-commit (>=4.6.0,<5.0.0)"
 ]
 
-[tool.black]
+[tool.ruff]
 line-length = 88
-target-version = ['py310']
-include = '\.pyi?$'
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "double"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
