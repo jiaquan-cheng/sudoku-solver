@@ -1,4 +1,4 @@
-from sudoku_solver import solve_puzzle, SolverResult
+from sudoku_solver import SolverResult, solve_puzzle
 
 
 def test_empty_puzzle_is_solvable():

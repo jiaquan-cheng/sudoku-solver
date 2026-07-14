@@ -1,5 +1,6 @@
-from z3 import Int, Solver, ModelRef, ArithRef, sat, unsat, unknown
 from enum import Enum
+
+from z3 import ArithRef, Int, ModelRef, Solver, sat, unknown, unsat
 
 
 class SolverResult(Enum):
@@ -44,7 +45,6 @@ def add_puzzle(solver: Solver, puzzle: list[list[int]], grid: list[list[ArithRef
 
 
 def add_sudoku_constraints(solver: Solver, grid: list[list[ArithRef]]):
-
     # cells must be between 1 and 9
     for r in grid:
         for c in r:
@@ -79,7 +79,6 @@ def add_sudoku_constraints(solver: Solver, grid: list[list[ArithRef]]):
 def solve_puzzle(
     puzzle: list[list[int]],
 ) -> tuple[SolverResult, list[list[int]] | None]:
-
     grid = [[Int(f"{r}{c}") for c in range(9)] for r in range(9)]
     solver = Solver()
     add_puzzle(solver, puzzle, grid)
@@ -88,7 +87,6 @@ def solve_puzzle(
     result = solver.check()
 
     if result == sat:
-
         return SolverResult.SAT, solution_to_list_of_lists(solver.model(), grid)
     elif result == unsat:
         return SolverResult.UNSAT, None

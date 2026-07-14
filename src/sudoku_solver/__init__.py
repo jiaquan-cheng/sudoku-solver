@@ -1,11 +1,11 @@
 from .solver import (
-    add_sudoku_constraints,
+    SolverResult,
     add_puzzle,
-    solve_puzzle,
-    str_to_list_of_lists,
+    add_sudoku_constraints,
     list_of_lists_to_str,
     puzzle_to_str,
-    SolverResult,
+    solve_puzzle,
+    str_to_list_of_lists,
 )
 
 __all__ = [

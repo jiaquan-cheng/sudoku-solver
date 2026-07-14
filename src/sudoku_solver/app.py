@@ -1,17 +1,17 @@
 import streamlit as st
-
 from solver import (
-    str_to_list_of_lists,
-    solve_puzzle,
+    SolverResult,
     list_of_lists_to_str,
     puzzle_to_str,
-    SolverResult,
+    solve_puzzle,
+    str_to_list_of_lists,
 )
 
 try:
     st.title("Sudoku Solver")
     st.write(
-        "Enter your Sudoku puzzle as an 81-character string (use 0 for empty cells). The solver does not check if puzzle has unique solution."
+        "Enter your Sudoku puzzle as an 81-character string (use 0 for empty cells). "
+        "The solver does not check if puzzle has unique solution."
     )
     user_input = st.text_area(
         "Paste your 81-char puzzle:",
@@ -24,13 +24,14 @@ try:
         st.stop()
     elif len(user_input) != 81:
         st.error(
-            "Puzzle must be an 81-character string of digits (0-9). Your input length is: "
-            + str(len(user_input))
+            "Puzzle must be an 81-character string of digits (0-9). "
+            "Your input length is: " + str(len(user_input))
         )
         st.stop()
     elif not user_input.isdigit():
         st.error(
-            "Puzzle must be an 81-character string of digits (0-9). Your input contains non-digit characters."
+            "Puzzle must be an 81-character string of digits (0-9). "
+            "Your input contains non-digit characters."
         )
         st.stop()
     if solve_button:

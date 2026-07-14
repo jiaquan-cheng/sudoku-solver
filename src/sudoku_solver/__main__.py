@@ -1,22 +1,25 @@
+import argparse
+
 from sudoku_solver.solver import (
+    SolverResult,
+    list_of_lists_to_str,
+    puzzle_to_str,
     solve_puzzle,
     str_to_list_of_lists,
-    SolverResult,
-    puzzle_to_str,
-    list_of_lists_to_str,
 )
-import argparse
 
 
 def main():
     try:
-
         parser = argparse.ArgumentParser(description="Solve a Sudoku puzzle.")
         parser.add_argument(
             "puzzle",
             nargs="?",
             type=str,
-            help="optional 81-digit string representation of the puzzle, 0 for empty cells.",
+            help=(
+                "Optional 81-digit string representation of the puzzle, "
+                "0 for empty cells."
+            ),
         )
         args = parser.parse_args()
 
@@ -34,12 +37,13 @@ def main():
             ]
         elif len(args.puzzle) != 81:
             raise ValueError(
-                "Puzzle must be an 81-character string of digits (0-9). Your input length is: "
-                + str(len(args.puzzle))
+                "Puzzle must be an 81-character string of digits (0-9). "
+                "Your input length is: " + str(len(args.puzzle))
             )
         elif not args.puzzle.isdigit():
             raise ValueError(
-                "Puzzle must be an 81-character string of digits (0-9). Your input contains non-digit characters."
+                "Puzzle must be an 81-character string of digits (0-9). "
+                "Your input contains non-digit characters."
             )
         else:
             puzzle = str_to_list_of_lists(args.puzzle)
