@@ -1,11 +1,16 @@
 import argparse
 
-from sudoku_solver.solver import (
-    SolverResult,
+from utils import (
+    get_default_puzzle,
     list_of_lists_to_str,
     puzzle_to_str,
-    solve_puzzle,
     str_to_list_of_lists,
+    validate_puzzle_string,
+)
+
+from sudoku_solver.solver import (
+    SolverResult,
+    solve_puzzle,
 )
 
 
@@ -24,28 +29,9 @@ def main():
         args = parser.parse_args()
 
         if not args.puzzle:
-            puzzle = [
-                [5, 3, 0, 0, 7, 0, 0, 0, 0],
-                [6, 0, 0, 1, 9, 5, 0, 0, 0],
-                [0, 9, 8, 0, 0, 0, 0, 6, 0],
-                [8, 0, 0, 0, 6, 0, 0, 0, 3],
-                [4, 0, 0, 8, 0, 3, 0, 0, 1],
-                [7, 0, 0, 0, 2, 0, 0, 0, 6],
-                [0, 6, 0, 0, 0, 0, 2, 8, 0],
-                [0, 0, 0, 4, 1, 9, 0, 0, 5],
-                [0, 0, 0, 0, 8, 0, 0, 7, 9],
-            ]
-        elif len(args.puzzle) != 81:
-            raise ValueError(
-                "Puzzle must be an 81-character string of digits (0-9). "
-                "Your input length is: " + str(len(args.puzzle))
-            )
-        elif not args.puzzle.isdigit():
-            raise ValueError(
-                "Puzzle must be an 81-character string of digits (0-9). "
-                "Your input contains non-digit characters."
-            )
+            puzzle = str_to_list_of_lists(get_default_puzzle())
         else:
+            validate_puzzle_string(args.puzzle)
             puzzle = str_to_list_of_lists(args.puzzle)
 
         print(puzzle_to_str(puzzle))

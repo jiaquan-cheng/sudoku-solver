@@ -1,10 +1,13 @@
 import streamlit as st
-from solver import (
+
+from sudoku_solver import (
     SolverResult,
+    get_default_puzzle,
     list_of_lists_to_str,
     puzzle_to_str,
     solve_puzzle,
     str_to_list_of_lists,
+    validate_puzzle_string,
 )
 
 try:
@@ -15,25 +18,16 @@ try:
     )
     user_input = st.text_area(
         "Paste your 81-char puzzle:",
-        value="530070000600195000098000060800060003400803001700020006060000280000419005000080079",
+        value=get_default_puzzle(),
     )
     solve_button = st.button("Solve")
 
-    if not user_input:
-        st.error("No puzzle input provided.")
+    try:
+        validate_puzzle_string(user_input)
+    except ValueError as e:
+        st.error(f"Invalid puzzle input: {e}")
         st.stop()
-    elif len(user_input) != 81:
-        st.error(
-            "Puzzle must be an 81-character string of digits (0-9). "
-            "Your input length is: " + str(len(user_input))
-        )
-        st.stop()
-    elif not user_input.isdigit():
-        st.error(
-            "Puzzle must be an 81-character string of digits (0-9). "
-            "Your input contains non-digit characters."
-        )
-        st.stop()
+
     if solve_button:
         puzzle = str_to_list_of_lists(user_input)
         result, solution = solve_puzzle(puzzle)
