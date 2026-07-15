@@ -11,3 +11,14 @@ format:
 
 test:
 	poetry run pytest
+
+IMAGE_NAME = sudoku-solver
+
+docker-build:
+	docker build -t $(IMAGE_NAME) .
+
+docker-run:
+	docker run --rm $(IMAGE_NAME) $(ARGS)
+
+docker-clean:
+	docker rmi -f $(IMAGE_NAME)
