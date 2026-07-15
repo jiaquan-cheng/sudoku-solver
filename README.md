@@ -8,8 +8,9 @@ Sudoku Solver built using the Z3 SMT solver.
 You can try the solver online [here](https://sudoku-solver-jia.streamlit.app/).
 
 ## Installation
+**Prerequisites**: Python 3.13+ and [Poetry](https://python-poetry.org/).
 
-This project uses [Poetry](https://python-poetry.org/) for dependency management. To install the dependencies, run:
+To install the dependencies, run:
 
 ```bash
 poetry install
@@ -50,3 +51,12 @@ Provide a puzzle:
 docker run --rm sudoku-solver "530070000600195000098000060800060003400803001700020006060000280000419005000080079"
 
 ```
+
+## Development
+
+This project uses `make` to manage development workflows. 
+
+- `make` : Runs the full test suite and quality checks.
+- `make lint` : Runs [Ruff](https://docs.astral.sh/ruff/) and [Mypy](https://mypy-lang.org/) for code quality and type safety.
+- `make format` : Auto-format code.
+- `make test` : Runs [Pytest](https://pytest.org/).
