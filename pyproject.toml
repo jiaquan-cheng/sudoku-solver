@@ -23,7 +23,8 @@ solve = "sudoku_solver.__main__:main"
 dev = [
     "pytest (>=9.0.3,<10.0.0)",
     "ruff (>=0.15.17,<0.16.0)",
-    "pre-commit (>=4.6.0,<5.0.0)"
+    "pre-commit (>=4.6.0,<5.0.0)",
+    "mypy (>=2.3.0,<3.0.0)"
 ]
 
 [tool.ruff]
@@ -31,10 +32,15 @@ line-length = 88
 target-version = "py313"
 
 [tool.ruff.lint]
-select = ["E", "F", "I"]
+select = ["E", "F", "I", "UP", "B", "C90", "SIM", "BLE"]
+fixable = ["ALL"]
 
 [tool.ruff.format]
 quote-style = "double"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[[tool.mypy.overrides]]
+module = "z3.*"
+ignore_missing_imports = true

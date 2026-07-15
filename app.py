@@ -31,7 +31,7 @@ try:
     if solve_button:
         puzzle = str_to_list_of_lists(user_input)
         result, solution = solve_puzzle(puzzle)
-        if result == SolverResult.SAT:
+        if result == SolverResult.SAT and solution is not None:
             solution_str = list_of_lists_to_str(solution)
             st.success("Solved Puzzle:" + "\n" + solution_str)
             st.write("Formatted Solution:")
@@ -40,5 +40,5 @@ try:
             st.error("The puzzle is unsolvable.")
         elif result == SolverResult.UNKNOWN:
             st.warning("The solver could not determine a solution.")
-except Exception as e:
+except Exception as e:  # noqa: BLE001
     st.error(f"Error: {e}")
