@@ -36,21 +36,29 @@ Note: The solver does not check if the puzzle has a unique solution.
 ## Docker
 Build the image:
 ```bash
-docker build -t sudoku-solver .
+make docker-build
 ```
 
 Run with default puzzle:
 
 ```bash
-docker run --rm sudoku-solver
+make docker-run
 ```
 
 Provide a puzzle:
 
 ```bash
-docker run --rm sudoku-solver "530070000600195000098000060800060003400803001700020006060000280000419005000080079"
+make docker-run ARGS="530070000600195000098000060800060003400803001700020006060000280000419005000080079"
 
 ```
+
+Clean up the image:
+
+```bash
+make docker-clean
+```
+
+Note: You can run `docker builder prune` to clean up unused build cache.
 
 ## Development
 
