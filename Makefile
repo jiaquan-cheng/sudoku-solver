@@ -7,7 +7,7 @@ IMAGE_NAME = sudoku-solver
 all: format lint test-cov
 
 lint:
-	poetry run ruff check .
+	poetry run ruff check . --fix
 	poetry run mypy .
 
 format:
