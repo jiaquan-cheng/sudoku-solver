@@ -1,6 +1,10 @@
-.PHONY: lint format test all
+.PHONY: lint format test test-cov all docker-build docker-run docker-clean
 
-all: format lint test
+PACKAGE_NAME = sudoku_solver
+
+IMAGE_NAME = sudoku-solver
+
+all: format lint test-cov
 
 lint:
 	poetry run ruff check .
@@ -12,7 +16,8 @@ format:
 test:
 	poetry run pytest
 
-IMAGE_NAME = sudoku-solver
+test-cov:
+	poetry run pytest --cov=$(PACKAGE_NAME) --cov-branch --cov-report=term-missing
 
 docker-build:
 	docker build -t $(IMAGE_NAME) .
