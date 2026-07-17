@@ -62,9 +62,14 @@ Note: You can run `docker builder prune` to clean up unused build cache.
 
 ## Development
 
-This project uses `make` to manage development workflows. 
+To install the dependencies for development, run:
 
-- `make` : Runs the full test suite and quality checks.
+```bash
+poetry install --with dev
+```
+
+- `make` : Runs the test suite and quality checks.
 - `make lint` : Runs [Ruff](https://docs.astral.sh/ruff/) and [Mypy](https://mypy-lang.org/) for code quality and type safety.
 - `make format` : Auto-format code.
 - `make test` : Runs [Pytest](https://pytest.org/).
+- `make test-cov` : Runs tests with coverage report.
