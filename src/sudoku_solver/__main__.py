@@ -13,7 +13,7 @@ from sudoku_solver.utils import (
 )
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Solve a Sudoku puzzle.")
     parser.add_argument(
         "puzzle",
@@ -39,7 +39,7 @@ def main():
     print(puzzle_to_str(puzzle))
 
     result, solution = solve_puzzle(puzzle)
-    if result == SolverResult.SAT:
+    if result == SolverResult.SAT and solution is not None:
         print("Found a solution!")
         print("Solution:" + list_of_lists_to_str(solution))
         print("Formatted Solution:")

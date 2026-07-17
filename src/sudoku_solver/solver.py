@@ -15,14 +15,16 @@ def _solution_to_list_of_lists(
     return [[model[c].as_long() for c in r] for r in grid]
 
 
-def _add_puzzle(solver: Solver, puzzle: list[list[int]], grid: list[list[ArithRef]]):
+def _add_puzzle(
+    solver: Solver, puzzle: list[list[int]], grid: list[list[ArithRef]]
+) -> None:
     for r in range(9):
         for c in range(9):
             if puzzle[r][c] != 0:
                 solver.add(grid[r][c] == puzzle[r][c])
 
 
-def _add_sudoku_constraints(solver: Solver, grid: list[list[ArithRef]]):
+def _add_sudoku_constraints(solver: Solver, grid: list[list[ArithRef]]) -> None:
     # cells must be between 1 and 9
     for r in grid:
         for c in r:
@@ -46,9 +48,12 @@ def _add_sudoku_constraints(solver: Solver, grid: list[list[ArithRef]]):
 
 def solve_puzzle(
     puzzle: list[list[int]],
+    timeout_ms: int | None = None,
 ) -> tuple[SolverResult, list[list[int]] | None]:
     grid = [[Int(f"{r}{c}") for c in range(9)] for r in range(9)]
     solver = Solver()
+    if timeout_ms is not None:
+        solver.set(timeout=timeout_ms)
     _add_puzzle(solver, puzzle, grid)
     _add_sudoku_constraints(solver, grid)
 
