@@ -3,24 +3,8 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Poetry
-        run: pipx install poetry
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-          cache: 'poetry'
-      - name: Install Dependencies
-        run: poetry install --with dev
-      - name: Run Ruff
-        run: poetry run ruff check .
 
-  test:
-    needs: lint
+  quality-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,5 +17,8 @@ jobs:
           cache: 'poetry'
       - name: Install Dependencies
         run: poetry install --with dev
-      - name: Run Tests
-        run: poetry run pytest
+      
+      - name: Run Linting and Tests
+        run: |
+          make lint
+          make test
