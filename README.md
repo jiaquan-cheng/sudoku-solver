@@ -73,3 +73,5 @@ poetry install --with dev
 - `make format` : Auto-format code.
 - `make test` : Runs [Pytest](https://pytest.org/).
 - `make test-cov` : Runs tests with coverage report.
+- `make profile` : Runs the code with [PyInstrument](https://pyinstrument.readthedocs.io/en/stable/) for profiling.
+- `make profile-html` : Runs the code with PyInstrument and generates an HTML report in `data/profile.html`.
