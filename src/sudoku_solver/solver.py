@@ -1,6 +1,8 @@
 from enum import Enum
 
-from z3 import ArithRef, Distinct, Int, ModelRef, Solver, sat, unknown, unsat
+from z3 import ArithRef, Distinct, Int, Solver, sat, unknown, unsat
+
+from sudoku_solver.utils import Puzzle
 
 
 class SolverResult(Enum):
@@ -9,19 +11,11 @@ class SolverResult(Enum):
     UNKNOWN = "unknown"
 
 
-def _solution_to_list_of_lists(
-    model: ModelRef, grid: list[list[ArithRef]]
-) -> list[list[int]]:
-    return [[model[c].as_long() for c in r] for r in grid]
-
-
-def _add_puzzle(
-    solver: Solver, puzzle: list[list[int]], grid: list[list[ArithRef]]
-) -> None:
+def _add_puzzle(solver: Solver, puzzle: Puzzle, grid: list[list[ArithRef]]) -> None:
     for r in range(9):
         for c in range(9):
-            if puzzle[r][c] != 0:
-                solver.add(grid[r][c] == puzzle[r][c])
+            if puzzle.as_list_of_lists[r][c] != 0:
+                solver.add(grid[r][c] == puzzle.as_list_of_lists[r][c])
 
 
 def _add_sudoku_constraints(solver: Solver, grid: list[list[ArithRef]]) -> None:
@@ -38,18 +32,21 @@ def _add_sudoku_constraints(solver: Solver, grid: list[list[ArithRef]]) -> None:
     # 3x3 box constraints
     for r_start in range(0, 9, 3):
         for c_start in range(0, 9, 3):
-            box = [
-                grid[i][j]
-                for i in range(r_start, r_start + 3)
-                for j in range(c_start, c_start + 3)
-            ]
-            solver.add(Distinct(box))
+            solver.add(Distinct(_get_box(grid, r_start, c_start)))
+
+
+def _get_box(grid: list[list[ArithRef]], r_start: int, c_start: int) -> list[ArithRef]:
+    return [
+        grid[r][c]
+        for r in range(r_start, r_start + 3)
+        for c in range(c_start, c_start + 3)
+    ]
 
 
 def solve_puzzle(
-    puzzle: list[list[int]],
+    puzzle: Puzzle,
     timeout_ms: int | None = None,
-) -> tuple[SolverResult, list[list[int]] | None]:
+) -> tuple[SolverResult, Puzzle | None]:
     grid = [[Int(f"{r}{c}") for c in range(9)] for r in range(9)]
     solver = Solver()
     if timeout_ms is not None:
@@ -60,7 +57,7 @@ def solve_puzzle(
     result = solver.check()
 
     if result == sat:
-        return SolverResult.SAT, _solution_to_list_of_lists(solver.model(), grid)
+        return SolverResult.SAT, Puzzle.from_solver(solver.model(), grid)
     elif result == unsat:
         return SolverResult.UNSAT, None
     elif result == unknown:

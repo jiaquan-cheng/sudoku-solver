@@ -5,11 +5,8 @@ from sudoku_solver.solver import (
     solve_puzzle,
 )
 from sudoku_solver.utils import (
+    Puzzle,
     get_default_puzzle,
-    list_of_lists_to_str,
-    puzzle_to_str,
-    str_to_list_of_lists,
-    validate_puzzle_string,
 )
 
 
@@ -25,25 +22,20 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    if not args.puzzle:
-        puzzle = str_to_list_of_lists(get_default_puzzle())
-    else:
-        try:
-            validate_puzzle_string(args.puzzle)
-        except ValueError as e:
-            print(f"Invalid puzzle input: {e}")
-            return
+    try:
+        puzzle = Puzzle.from_str(args.puzzle or get_default_puzzle())
+    except ValueError as e:
+        print(f"Invalid puzzle input: {e}")
+        return
 
-        puzzle = str_to_list_of_lists(args.puzzle)
-
-    print(puzzle_to_str(puzzle))
+    print(puzzle)
 
     result, solution = solve_puzzle(puzzle)
     if result == SolverResult.SAT and solution is not None:
         print("Found a solution!")
-        print("Solution:" + list_of_lists_to_str(solution))
+        print("Solution:" + solution.as_str)
         print("Formatted Solution:")
-        print(puzzle_to_str(solution))
+        print(solution)
     elif result == SolverResult.UNSAT:
         print("This puzzle is logically impossible.")
     elif result == SolverResult.UNKNOWN:

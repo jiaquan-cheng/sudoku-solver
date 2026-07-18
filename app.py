@@ -1,13 +1,10 @@
 import streamlit as st
 
 from sudoku_solver import (
+    Puzzle,
     SolverResult,
     get_default_puzzle,
-    list_of_lists_to_str,
-    puzzle_to_str,
     solve_puzzle,
-    str_to_list_of_lists,
-    validate_puzzle_string,
 )
 
 try:
@@ -22,20 +19,18 @@ try:
     )
     solve_button = st.button("Solve")
 
-    try:
-        validate_puzzle_string(user_input)
-    except ValueError as e:
-        st.error(f"Invalid puzzle input: {e}")
-        st.stop()
-
     if solve_button:
-        puzzle = str_to_list_of_lists(user_input)
+        try:
+            puzzle = Puzzle.from_str(user_input)
+        except ValueError as e:
+            st.error(f"Invalid puzzle input: {e}")
+            st.stop()
+
         result, solution = solve_puzzle(puzzle)
         if result == SolverResult.SAT and solution is not None:
-            solution_str = list_of_lists_to_str(solution)
-            st.success("Solved Puzzle:" + "\n" + solution_str)
+            st.success("Solved Puzzle:" + "\n" + solution.as_str)
             st.write("Formatted Solution:")
-            st.text(puzzle_to_str(solution))
+            st.text(solution)
         elif result == SolverResult.UNSAT:
             st.error("The puzzle is unsolvable.")
         elif result == SolverResult.UNKNOWN:
